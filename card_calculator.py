@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Usage: python3 card_calculator2.py iclass 214 1236 26
+# Usage: python3 card_calculator.py iclass 214 1236 26
 # Updated: 5/16/2024
 
 import sys
