@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-import sys
+# Updated: 5/16/2024
 
+import sys
 
 def bitCount(int_type):
     # return number 1's in a number when represented as binary
@@ -152,18 +153,17 @@ def generate35bitHex(facilityCode, cardCode, cardType, preamble):
     if cardType == "prox":
         print("Write the following to a PROX (T55x7) card:")
         cardData = cardData | preamble
-        return "%010x" % cardData
+        print("%010x" % cardData)
     elif cardType == "iclass":
-        # adjust preamble for encrypting with ProxMark
+        # adjust preamble for encrypting with Proxmark3
         preamble = preamble ^ 0x2000000000
-        print("Write the following values to disable encryption on the card:")
-        print("Blk 6 - 030303030003E014")
-        print("Blk 8 - 0000000000000000")
-        print("Blk 9 - 0000000000000000")
-        print("")
-        print("Write the following to Blk 7 on an iClass card:")
         cardData = cardData | preamble
-        return "%016x" % cardData
+        print("Write the following values to an iCLASS 2k card:")
+        print("hf iclass wrbl --blk 6 -d 030303030003E014 --ki 0")
+        print(f"hf iclass wrbl --blk 7 -d {cardData:016x} --ki 0")
+        print("hf iclass wrbl --blk 8 -d 0000000000000000 --ki 0")
+        print("hf iclass wrbl --blk 9 -d 0000000000000000 --ki 0")
+    return ""
 
 
 def generate26bitHex(facilityCode, cardCode, cardType, preamble):
@@ -180,18 +180,17 @@ def generate26bitHex(facilityCode, cardCode, cardType, preamble):
     if cardType == "prox":
         print("Write the following to a PROX (T55x7) card:")
         cardData = cardData | preamble
-        return "%010x" % cardData
+        print("%010x" % cardData)
     elif cardType == "iclass":
-        # adjust preamble for encrypting with ProxMark
+        # adjust preamble for encrypting with Proxmark3
         preamble = preamble ^ 0x2000000000
-        print("Write the following values to disable encryption on the card:")
-        print("Blk 6 - 030303030003E014")
-        print("Blk 8 - 0000000000000000")
-        print("Blk 9 - 0000000000000000")
-        print("")
-        print("Write the following to Blk 7 on an iClass card:")
         cardData = cardData | preamble
-        return "%016x" % cardData
+        print("Write the following values to an iCLASS 2k card:")
+        print("hf iclass wrbl --blk 6 -d 030303030003E014 --ki 0")
+        print(f"hf iclass wrbl --blk 7 -d {cardData:016x} --ki 0")
+        print("hf iclass wrbl --blk 8 -d 0000000000000000 --ki 0")
+        print("hf iclass wrbl --blk 9 -d 0000000000000000 --ki 0")
+    return ""
 
 
 def main():
